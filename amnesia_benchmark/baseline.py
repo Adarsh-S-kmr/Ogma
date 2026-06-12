@@ -77,10 +77,6 @@ def train_baseline():
         print(f"Epoch [{epoch+1}/{epochs}] | Loss: {avg_loss:.4f} | Accuracy: {accuracy:.2f}%")
         
     print("\nTraining Complete.")
-    print("Notice how the accuracy struggles to get high. Since the target is a digit (0-9), ")
-    print("random guessing yields about 10% accuracy. The LSTM might figure out it needs to ")
-    print("predict a number, but it fundamentally fails to do the associative retrieval ")
-    print("required to actually look up the correct rule. This is your failing baseline!")
 
 if __name__ == "__main__":
     train_baseline()

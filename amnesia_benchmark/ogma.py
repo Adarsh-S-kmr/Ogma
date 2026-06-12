@@ -142,8 +142,6 @@ def train_ogma():
         print(f"Epoch [{epoch+1}/{epochs}] | Loss: {avg_loss:.4f} | Accuracy: {accuracy:.2f}%")
         
     print("\nTraining Complete.")
-    print("Compare this to the LSTM baseline! Ogma's Fast Weight memory allows it to ")
-    print("instantly write and retrieve the temporary rules, absolutely crushing the task.")
 
 if __name__ == "__main__":
     train_ogma()
