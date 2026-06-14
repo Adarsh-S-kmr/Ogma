@@ -31,7 +31,7 @@ class TransformerBaseline(nn.Module):
 
 def train_baseline():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    print(f"Using device: {device}")
+    print(f"Using device: {device}", flush=True)
     
     seq_len = 64
     dataset = ShakespeareDataset(seq_len=seq_len)
@@ -42,13 +42,13 @@ def train_baseline():
     
     model = TransformerBaseline(vocab_size=dataset.vocab_size, embed_dim=64, num_heads=4, num_layers=2, max_seq_len=seq_len).to(device)
     
-    print(f"Transformer Parameters: {sum(p.numel() for p in model.parameters())}")
+    print(f"Transformer Parameters: {sum(p.numel() for p in model.parameters())}", flush=True)
     
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(model.parameters(), lr=1e-3)
     
     epochs = 1
-    print("Starting training...")
+    print("Starting training...", flush=True)
     for epoch in range(epochs):
         model.train()
         total_loss = 0
@@ -65,10 +65,13 @@ def train_baseline():
             
             total_loss += loss.item()
             
-            if batch_idx % 200 == 0:
-                print(f"Epoch {epoch+1} | Batch {batch_idx}/{len(dataloader)} | Loss: {loss.item():.4f}")
+            if batch_idx % 20 == 0:
+                print(f"Epoch {epoch+1} | Batch {batch_idx} | Loss: {loss.item():.4f}", flush=True)
                 
-        print(f"Epoch {epoch+1} Average Loss: {total_loss / len(dataloader):.4f}")
+            if batch_idx >= 50: # Just run 50 batches for testing
+                break
+                
+        print(f"Epoch {epoch+1} Average Loss: {total_loss / 50:.4f}", flush=True)
 
 if __name__ == "__main__":
     train_baseline()
